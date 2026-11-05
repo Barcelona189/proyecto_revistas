@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Envío y Suscripción</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9; color: #333; }
+        .form-container { background: white; padding: 30px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); max-width: 700px; margin: auto; border: 1px solid #ccc; }
+        h2 { color: #0056b3; margin-top: 0; text-align: center; }
+        .form-section-title { font-size: 15px; font-weight: bold; color: #0056b3; margin-top: 20px; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .form-group { margin-bottom: 12px; }
+        label { display: block; margin-bottom: 4px; font-weight: bold; font-size: 13px; }
+        input, textarea { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        .form-row { display: flex; gap: 15px; }
+        .form-row .form-group { flex: 1; }
+        button[type="submit"] { background-color: #28a745; color: white; border: none; padding: 12px; border-radius: 4px; cursor: pointer; font-size: 16px; width: 100%; margin-top: 15px; }
+        button[type="submit"]:hover { background-color: #218838; }
+        .back-link { display: block; text-align: center; margin-top: 15px; color: #0056b3; text-decoration: none; font-weight: bold; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Editar Envío No. {{ envio.no_envio }}</h2>
+        <form method="POST">
+            
+            <div class="form-section-title">1. Datos Generales de la Suscripción y Cliente</div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Suscripción No.:</label>
+                    <input type="text" name="suscripcion" value="{{ cliente.suscripcion }}" required>
+                </div>
+                <div class="form-group">
+                    <label>NIT:</label>
+                    <input type="text" name="nit" value="{{ cliente.nit }}" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Nombre Cliente:</label>
+                <input type="text" name="nombre" value="{{ cliente.nombre }}" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Para cobro en Dirección:</label>
+                    <input type="text" name="dir_cobro" value="{{ cliente.dir_cobro }}" required>
+                </div>
+                <div class="form-group">
+                    <label>Teléfono (Cobro):</label>
+                    <input type="text" name="tel_cobro" value="{{ cliente.tel_cobro }}" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Para entrega en Dirección:</label>
+                    <input type="text" name="dir_entrega" value="{{ cliente.dir_entrega }}" required>
+                </div>
+                <div class="form-group">
+                    <label>Teléfono (Entrega):</label>
+                    <input type="text" name="tel_entrega" value="{{ cliente.tel_entrega }}" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Validez - Fecha Inicio:</label>
+                    <input type="date" name="inicio" value="{{ cliente.inicio }}" required>
+                </div>
+                <div class="form-group">
+                    <label>Validez - Fecha Finalización:</label>
+                    <input type="date" name="fin" value="{{ cliente.fin }}" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Revista:</label>
+                <input type="text" name="revista" value="{{ cliente.revista }}" required>
+            </div>
+
+            <div class="form-section-title">2. Detalles del Envío</div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>No. de Revista:</label>
+                    <input type="number" name="revista_no" value="{{ envio.revista_no }}" required>
+                </div>
+                <div class="form-group">
+                    <label>Empleado Asignado:</label>
+                    <input type="text" name="empleado" value="{{ envio.empleado }}" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Fecha Programada:</label>
+                    <input type="date" name="fecha_prog" value="{{ envio.fecha_prog }}" required>
+                </div>
+                <div class="form-group">
+                    <label>Fecha de Entrega:</label>
+                    <input type="date" name="fecha_ent" value="{{ envio.fecha_ent }}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Observaciones:</label>
+                <textarea name="obs">{{ envio.obs }}</textarea>
+            </div>
+
+            <button type="submit">Guardar Cambios</button>
+        </form>
+        <a href="/" class="back-link">Cancelar / Volver</a>
+    </div>
+
+</body>
+</html>

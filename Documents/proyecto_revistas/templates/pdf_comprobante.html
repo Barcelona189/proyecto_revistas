@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Comprobante de Envío - No. {{ envio.no_envio }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; color: #000; }
+        .document-box { border: 3px double #000; padding: 30px; max-width: 800px; margin: auto; }
+        .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #000; padding-bottom: 15px; margin-bottom: 20px; }
+        .title { font-size: 24px; font-weight: bold; font-style: italic; }
+        .section { margin-bottom: 12px; font-size: 15px; line-height: 1.5; }
+        .line { border-bottom: 1px solid #000; display: inline-block; padding: 0 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 25px; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: left; font-size: 14px; }
+        th { background-color: #f2f2f2; text-align: center; }
+        .print-btn { text-align: center; margin-top: 30px; }
+        .print-btn button { background: #007BFF; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 4px; cursor: pointer; }
+        @media print {
+            .print-btn { display: none; }
+            body { margin: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="document-box">
+        <div class="header">
+            <div>
+                <strong>Suscripción No.</strong> <span class="line">{{ cliente.suscripcion }}</span>
+            </div>
+            <div class="title">Revistas. S.A.</div>
+        </div>
+
+        <div class="section">
+            <strong>Nombre Cliente:</strong> <span class="line" style="width: 60%;">{{ cliente.nombre }}</span>
+            <strong style="margin-left: 20px;">Nit:</strong> <span class="line" style="width: 20%;">{{ cliente.nit }}</span>
+        </div>
+
+        <div class="section">
+            <strong>Para cobro en Dirección:</strong> <span class="line" style="width: 55%;">{{ cliente.dir_cobro }}</span>
+            <strong style="margin-left: 10px;">Teléfono:</strong> <span class="line" style="width: 15%;">{{ cliente.tel_cobro }}</span>
+        </div>
+
+        <div class="section">
+            <strong>Para entrega en Dirección:</strong> <span class="line" style="width: 53%;">{{ cliente.dir_entrega }}</span>
+            <strong style="margin-left: 10px;">Teléfono:</strong> <span class="line" style="width: 15%;">{{ cliente.tel_entrega }}</span>
+        </div>
+
+        <div class="section" style="margin-top: 20px;">
+            <strong>Validez de suscripción:</strong><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Fecha inicio: <span class="line" style="width: 20%;">{{ cliente.inicio }}</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Fecha de finalización: <span class="line" style="width: 20%;">{{ cliente.fin }}</span>
+        </div>
+
+        <div class="section" style="margin-top: 15px;">
+            <strong>Revista:</strong> <span class="line" style="width: 50%;">{{ cliente.revista }}</span>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Envío No.</th>
+                    <th>Revista No</th>
+                    <th>Fecha Programada de Entrega</th>
+                    <th>Empleado Asignado</th>
+                    <th>Fecha de Entrega</th>
+                    <th>Observaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align: center;">{{ envio.no_envio }}</td>
+                    <td style="text-align: center;">{{ envio.revista_no }}</td>
+                    <td>{{ envio.fecha_prog }}</td>
+                    <td>{{ envio.empleado }}</td>
+                    <td>{{ envio.fecha_ent if envio.fecha_ent else '' }}</td>
+                    <td>{{ envio.obs if envio.obs else '' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="print-btn">
+        <button onclick="window.print()">🖨️ Guardar como PDF / Imprimir</button>
+    </div>
+
+</body>
+</html>
